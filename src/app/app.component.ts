@@ -12,9 +12,11 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
       state('2', style({'background-color': 'green', transform: ' scale(0.5)'})),
       transition('0 => 1', animate(300)),
       transition('1 => 0', animate(400)),
-      transition('* <=> 2', animate(500)),
-    ])
-  ]
+      transition('2 <=> *', [
+        style({'background-color': 'blue'}),
+        animate(1000, style({'border-radius': '50px'})),
+      ]),
+    ])]
 })
 export class AppComponent {
   list = ['Milk', 'Sugar', 'Bread'];
@@ -25,7 +27,7 @@ export class AppComponent {
   }
 
   onShrink() {
-    console.log(this.divState !== 2)
+    console.log(this.divState !== 2);
     this.divState = (this.divState !== 2) ? 2 : 0;
   }
 
