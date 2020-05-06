@@ -16,24 +16,26 @@
       <hr>
       <ul class="list-group">
         <li
+          [@itemTrigger]="itemTrigger"
           class="list-group-item"
-          (click)="onDelete(item)"
-          *ngFor="let item of list">
+          (click)="onDelete(i)"
+          *ngFor="let item of list;let i = index">
           {{ item }}
         </li>
       </ul>
     </div>
   </div>
-  <hr>
-  <div class="row">
-    <div class="col-xs-12">
-      <ul class="list-group">
-        <li
-          class="list-group-item"
-          (click)="onDelete(item)"
-          *ngFor="let item of list">
-          {{ item }}
-        </li>
-      </ul>
-    </div>
-  </div>
+<!--  <hr>-->
+<!--  <div class="row">-->
+<!--    <div class="col-xs-12">-->
+<!--      <ul class="list-group">-->
+<!--        <li-->
+<!--          [@addItemTrigger]="addItemTrigger"-->
+<!--          class="list-group-item"-->
+<!--          (click)="onDelete(i)"-->
+<!--          *ngFor="let item of list;let i = index">-->
+<!--          {{ item }}-->
+<!--        </li>-->
+<!--      </ul>-->
+<!--    </div>-->
+<!--  </div>-->

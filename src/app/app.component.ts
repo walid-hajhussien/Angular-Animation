@@ -16,11 +16,22 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
         style({'background-color': 'blue'}),
         animate(1000, style({'border-radius': '50px'})),
       ]),
+    ]),
+    trigger('itemTrigger', [
+      state('0', style({opacity: 1, transform: 'translateX(0)'})),
+      transition('void => *', [
+        style({opacity: 0, transform: 'translateX(-100px)'}),
+        animate(500)
+      ]),
+      transition('* => void', [
+        animate(1000, style({opacity: 0, transform: 'translateX(1000px)'}))
+      ])
     ])]
 })
 export class AppComponent {
   list = ['Milk', 'Sugar', 'Bread'];
   divState = 0;
+  itemTrigger = 0;
 
   onAnimate() {
     this.divState = this.divState ? 0 : 1;
@@ -34,7 +45,12 @@ export class AppComponent {
   onAdd(item) {
     if (item.length > 0) {
       this.list.push(item);
+
     }
 
+  }
+
+  onDelete(index: number) {
+    this.list.splice(index, 1);
   }
 }
