@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {animate, state, style, transition, trigger} from '@angular/animations';
+import {animate, group, keyframes, state, style, transition, trigger} from '@angular/animations';
 
 
 @Component({
@@ -18,16 +18,31 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
       ]),
     ]),
     trigger('itemTrigger', [
-      state('0', style({opacity: 1, transform: 'translateX(0)'})),
-      transition('void => *', [
+      state('0', style({opacity: 1, transform: 'translateX(0)', color: 'black'})),
+      transition('normalCase => *', [
         style({opacity: 0, transform: 'translateX(-100px)'}),
         animate(500)
       ]),
+      transition('void => *', [
+        animate(1000, keyframes([
+          style({opacity: 0, transform: 'translateX(-100px)', offset: 0}),
+          style({opacity: 0.5, transform: 'translateX(-50px)', offset: 0.5}),
+          style({opacity: 1, transform: 'translateX(0px)', offset: 0.8})
+        ]))
+      ]),
+      transition('normalCaseDelete => void', [
+        animate(50, style({color: 'red'})),
+        animate(500, style({opacity: 0, transform: 'translateX(1000px)'}))
+      ]),
       transition('* => void', [
-        animate(1000, style({opacity: 0, transform: 'translateX(1000px)'}))
+        group([
+          animate(200, style({color: 'red'})),
+          animate(1000, style({opacity: 0, transform: 'translateX(1000px)'}))
+        ])
       ])
     ])]
 })
+
 export class AppComponent {
   list = ['Milk', 'Sugar', 'Bread'];
   divState = 0;
