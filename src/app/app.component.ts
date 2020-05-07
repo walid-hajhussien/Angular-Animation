@@ -65,6 +65,14 @@ export class AppComponent {
 
   }
 
+  animationStart(event) {
+    console.log('0', event);
+  }
+
+  animationDone(event) {
+    console.log('1', event);
+  }
+
   onDelete(index: number) {
     this.list.splice(index, 1);
   }
